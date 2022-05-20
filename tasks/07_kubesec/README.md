@@ -1,7 +1,9 @@
 
-kubesec scan 07.yaml
+kubesec scan pod.yaml
 
-fix yaml
+fix privileged
 
-run again
+...run again
+
+
 

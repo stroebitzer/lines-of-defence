@@ -1,13 +1,17 @@
 #!/bin/bash
 
-# 01_kubelet
-# cat /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
-# vi /var/lib/kubelet/config.yaml
-# change authentication
-# change authorization
 # systemctl daemon-reload
 # systemctl restart kubelet
 # systemctl status kubelet
+
+echo "Patching Kubelet"
+mkdir /root/tmp
+sed  's/    enabled: false/    enabled: true/g' /var/lib/kubelet/config.yaml > /root/tmp/kubelet-1.yaml
+sed  's/  mode: Webhook/  mode: AlwaysAllow/g' /root/tmp/kubelet-1.yaml > /root/tmp/kubelet-2.yaml
+mv /root/tmp/kubelet-2.yaml /var/lib/kubelet/config.yaml
+systemctl daemon-reload
+systemctl restart kubelet
+systemctl status kubelet
 
 echo "Patching API Server"
 mkdir /root/apiserver

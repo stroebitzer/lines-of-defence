@@ -87,6 +87,18 @@ runcmd:
   - apt install etcd-client --yes
   - export ETCDCTL_API=3
 
+  - echo "================================================= CloudInit Phase Install KubeSec"
+  - wget https://github.com/controlplaneio/kubesec/releases/download/v2.11.4/kubesec_linux_amd64.tar.gz
+  - tar -xvf kubesec_linux_amd64.tar.gz
+  - mv kubesec /usr/local/bin/
+
+  - echo "================================================= CloudInit Phase Install Trivy"
+  - apt-get install wget apt-transport-https gnupg lsb-release --yes
+  - wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key | apt-key add -
+  - echo deb https://aquasecurity.github.io/trivy-repo/deb $(lsb_release -sc) main | tee -a /etc/apt/sources.list.d/trivy.list
+  - apt-get update
+  - apt-get install trivy
+
   - echo "================================================= CloudInit Phase Clone Git Repo"
   - git clone https://github.com/stroebitzer/lines-of-defence.git /root/lines-of-defence
 
