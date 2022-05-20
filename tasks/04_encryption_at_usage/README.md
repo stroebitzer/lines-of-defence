@@ -1,4 +1,5 @@
-<!-- TODO where do the secrets come from, from a git repo??? -->
+
+# create secret
 
 kubectl create secret generic my-secret --from-literal password=password123
 

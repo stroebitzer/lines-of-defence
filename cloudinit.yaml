@@ -83,8 +83,13 @@ runcmd:
   - apt update
   - apt install helm
 
+  - echo "================================================= CloudInit Phase Install ETCD Client"
+  - apt install etcd-client --yes
+  - export ETCDCTL_API=3
+
   - echo "================================================= CloudInit Phase Clone Git Repo"
   - git clone https://github.com/stroebitzer/lines-of-defence.git /root/lines-of-defence
+
 
   # TODO reboot machine
 

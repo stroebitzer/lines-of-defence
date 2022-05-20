@@ -19,17 +19,67 @@ etcdctl \
   --cacert=/etc/kubernetes/pki/etcd/ca.crt \
   --cert=/etc/kubernetes/pki/etcd/server.crt \
   --key=/etc/kubernetes/pki/etcd/server.key \
-      snapshot save snap.db
+      snapshot save backup.db
 
-cat snap.db | grep -a my-secret
+cat backup.db | grep -a password123
 
 
 # implement encryption at rest
 
 ## customize encryption-provider-config
 
-kubectl create secret generic my-secret --from-literal password2=password123
+take a look at encryption config => PW and resource types
+
+cp /root/lines-of-defence/tasks/06_encryption_at_rest/encryption-config.yaml /root/apiserver
+
+--encryption-provider-config=/apiserver/encryption-config.yaml
+
+## check encryption => expected fail
+
+etcdctl \
+  --endpoints=https://127.0.0.1:2379  \
+  --cacert=/etc/kubernetes/pki/etcd/ca.crt \
+  --cert=/etc/kubernetes/pki/etcd/server.crt \
+  --key=/etc/kubernetes/pki/etcd/server.key \
+      get /registry/secrets/default/my-secret
+
+kubectl create secret generic my-secret --from-literal password2=password456
+
+...etcd my-secret-2
+
+### encrypt all existing secrets
+kubectl get secrets --all-namespaces -o json | kubectl replace -f -
+
+...etcd my-secret
 
 # check secret is in plain text
 
 # backup check
+
+etcdctl \
+  --endpoints=https://127.0.0.1:2379  \
+  --cacert=/etc/kubernetes/pki/etcd/ca.crt \
+  --cert=/etc/kubernetes/pki/etcd/server.crt \
+  --key=/etc/kubernetes/pki/etcd/server.key \
+      snapshot save backup.db
+
+cat backup.db | grep -a password123
+
+cat backup.db | grep -a password456
+
+
+# fix old data in backup
+<!-- TODO does not work maybe due to password version v1 -->
+
+etcdctl --write-out=table snapshot status backup.db
+
+etcdctl \
+  --endpoints=https://127.0.0.1:2379  \
+  --cacert=/etc/kubernetes/pki/etcd/ca.crt \
+  --cert=/etc/kubernetes/pki/etcd/server.crt \
+  --key=/etc/kubernetes/pki/etcd/server.key \
+  compact 27862
+
+... create backup again
+
+cat backup.db | grep -a password123
