@@ -83,6 +83,9 @@ runcmd:
   - apt update
   - apt install helm
 
+  - echo "================================================= CloudInit Phase Clone Git Repo"
+  - git clone https://github.com/stroebitzer/lines-of-defence.git /root/lines-of-defence
+
   # TODO reboot machine
 
   - echo "================================================= CloudInit Finished Successfully"

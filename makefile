@@ -10,7 +10,7 @@ create:
 
 .PHONY: connect
 connect: export LOD_IP=$$(hcloud server list -o noheader -o columns=ipv4)
-connect: export LOD_SSH_KEY_PATH=/home/hubert/Desktop/craft_conf/secrets/id_rsa
+connect: export LOD_SSH_KEY_PATH=/home/hubert/git/lines-of-defence/secrets/id_rsa
 connect:
 	ssh-keygen -f "/home/hubert/.ssh/known_hosts" -R "$(LOD_IP)"
 	ssh -o StrictHostKeyChecking=no -i $(LOD_SSH_KEY_PATH) root@$(LOD_IP)
