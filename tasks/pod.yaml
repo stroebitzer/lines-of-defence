@@ -3,6 +3,7 @@ kind: Pod
 metadata:
   name: my-suboptimal-pod
 spec:
+  terminationGracePeriodSeconds: 0
   # automountServiceAccountToken: false
   containers:
     - name: my-ubuntu

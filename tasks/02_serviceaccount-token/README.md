@@ -1,11 +1,11 @@
 
 # getting
 
-kubectl exec -it my-pod -- cat /var/run/secrets/kubernetes.io/serviceaccount/token
-kubectl exec -it my-pod -- cat /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+kubectl exec -it my-suboptimal-pod -- cat /var/run/secrets/kubernetes.io/serviceaccount/token
+kubectl exec -it my-suboptimal-pod -- cat /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
 
-TOKEN=$(kubectl exec -it my-pod -- cat /var/run/secrets/kubernetes.io/serviceaccount/token)
-kubectl exec -it my-pod -- cat /var/run/secrets/kubernetes.io/serviceaccount/ca.crt > ca.crt
+TOKEN=$(kubectl exec -it my-suboptimal-pod -- cat /var/run/secrets/kubernetes.io/serviceaccount/token)
+kubectl exec -it my-suboptimal-pod -- cat /var/run/secrets/kubernetes.io/serviceaccount/ca.crt > ca.crt
 
 curl -s $API_SERVER/api/v1/namespaces/default/pods --header "Authorization: Bearer $TOKEN" --cacert ca.crt
 

@@ -85,7 +85,6 @@ runcmd:
 
   - echo "================================================= CloudInit Phase Install ETCD Client"
   - apt install etcd-client --yes
-  - export ETCDCTL_API=3
 
   - echo "================================================= CloudInit Phase Install KubeSec"
   - wget https://github.com/controlplaneio/kubesec/releases/download/v2.11.4/kubesec_linux_amd64.tar.gz
@@ -102,6 +101,8 @@ runcmd:
   - echo "================================================= CloudInit Phase Clone Git Repo"
   - git clone https://github.com/stroebitzer/lines-of-defence.git /root/lines-of-defence
 
+  - echo "================================================= CloudInit Phase Running Shell Script"
+  - /root/lines-of-defence/tasks/setup.sh
 
   # TODO reboot machine
 
