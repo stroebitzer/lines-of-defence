@@ -23,7 +23,7 @@ apparmor_parser /etc/apparmor.d/kubernetes
 kubectl exec my-pod -- cat /proc/1/attr/current
 => see if profile is available
 
-
+<!-- TODO tmp test exists maybe another file -->
 kubectl exec my-pod -- touch /tmp/test
 => error
 

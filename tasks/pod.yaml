@@ -2,6 +2,8 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: my-suboptimal-pod
+  # annotations:
+  #   container.apparmor.security.beta.kubernetes.io/my-ubuntu: localhost/k8s-apparmor-example-deny-write
 spec:
   terminationGracePeriodSeconds: 0
   # automountServiceAccountToken: false

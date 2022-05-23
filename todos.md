@@ -12,3 +12,11 @@ https://github.com/kubermatic/security-questionnaire
 kubelinter
 
 dashboard?
+
+
+explain installation of tools on each topic via shell script and explain
+
+verify installation as first step of tasks everywhere
+
+remove ubuntu image wherever possible, use smaller image
+
