@@ -20,3 +20,4 @@ verify installation as first step of tasks everywhere
 
 remove ubuntu image wherever possible, use smaller image
 
+keep data in own databases app databases
