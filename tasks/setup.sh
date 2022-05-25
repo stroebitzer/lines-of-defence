@@ -4,7 +4,7 @@
 # systemctl restart kubelet
 # systemctl status kubelet
 
-echo "Patching Kubelet"
+echo "Setup Script Patching Kubelet"
 mkdir /root/tmp
 sed  's/    enabled: false/    enabled: true/g' /var/lib/kubelet/config.yaml > /root/tmp/kubelet-1.yaml
 sed  's/  mode: Webhook/  mode: AlwaysAllow/g' /root/tmp/kubelet-1.yaml > /root/tmp/kubelet-2.yaml
@@ -13,7 +13,7 @@ systemctl daemon-reload
 systemctl restart kubelet
 # systemctl status kubelet
 
-echo "Patching API Server"
+echo "Setup Script Patching API Server"
 mkdir /root/apiserver
 mkdir /root/tmp
 sed  '/  volumes:/a \
@@ -32,8 +32,8 @@ mv /root/tmp/apiserver-2.yaml /etc/kubernetes/manifests/kube-apiserver.yaml
 # export API_SERVER=https://$IP:6443
 # PS1="$ "
 # source <(kubectl completion bash)
-# kubectl apply -f pod.yaml
 # export ETCDCTL_API=3
+# kubectl apply -f /root/lines-of-defence/tasks/pod.yaml
+# kubectl create clusterrolebinding my-suboptimal-clusterrolebinding --clusterrole=cluster-admin --serviceaccount default:default
 
-
-echo "Finished successfuly"
+echo "Setup Script Finished Successfuly"

@@ -9,14 +9,24 @@ kubectl exec -it my-suboptimal-pod -- cat /var/run/secrets/kubernetes.io/service
 
 curl -s $API_SERVER/api/v1/namespaces/default/pods --header "Authorization: Bearer $TOKEN" --cacert ca.crt
 
-=> pods is forbidden
+=> should work
 
-kubectl create clusterrolebinding default --clusterrole=cluster-admin --serviceaccount default:default
+kubectl get clusterrolebindings
 
-curl -s $API_SERVER/api/v1/namespaces/default/pods --header "Authorization: Bearer $TOKEN" --cacert ca.crt
+=> check the default my-suboptimal-clusterrolebinding
+
+kubectl delete clusterrolebinding my-suboptimal-clusterrolebinding
+
+kubectl create clusterrolebinding my-suboptimal-clusterrolebinding --clusterrole=cluster-admin --serviceaccount default:default
+
+... curl again
+
+=> should not work
 
 # check kubadm
 cat /etc/kubernetes/manifests/kube-apiserver.yaml 
+
+=> check authorization mode
 
 # create stuff
 kubectl create clusterrole dev-user --verb=get,list,watch --resource=pods
