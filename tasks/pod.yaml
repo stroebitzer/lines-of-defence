@@ -27,8 +27,10 @@ spec:
       volumeMounts:
         - name: host
           mountPath: /host/
+          # readOnly: true
         # - name: secret-data
         #   mountPath: /secret/
+        #   readOnly: true
   volumes:
     - name: host
       hostPath:

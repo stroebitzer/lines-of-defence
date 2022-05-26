@@ -1,7 +1,7 @@
 
 # inspect etcd
 cat /etc/kubernetes/manifests/etcd.yaml 
-cd /var/lib/etcd/
+ls -alh /var/lib/etcd/
 
 kubectl create secret generic my-secret --from-literal my-password-1=password123
 
@@ -12,16 +12,6 @@ etcdctl \
   --cert=/etc/kubernetes/pki/etcd/server.crt \
   --key=/etc/kubernetes/pki/etcd/server.key \
       get /registry/secrets/default/my-secret
-
-# backup
-etcdctl \
-  --endpoints=https://127.0.0.1:2379  \
-  --cacert=/etc/kubernetes/pki/etcd/ca.crt \
-  --cert=/etc/kubernetes/pki/etcd/server.crt \
-  --key=/etc/kubernetes/pki/etcd/server.key \
-      snapshot save backup.db
-
-cat backup.db | grep -a password123
 
 
 # implement encryption at rest
@@ -43,19 +33,16 @@ etcdctl \
   --key=/etc/kubernetes/pki/etcd/server.key \
       get /registry/secrets/default/my-secret
 
-kubectl create secret generic my-secret --from-literal password2=password456
+kubectl create secret generic my-secret-2 --from-literal password2=password456
 
 ...etcd my-secret-2
 
-### encrypt all existing secrets
+# encrypt all existing secrets
 kubectl get secrets --all-namespaces -o json | kubectl replace -f -
 
 ...etcd my-secret
 
-# check secret is in plain text
-
-# backup check
-
+# backup
 etcdctl \
   --endpoints=https://127.0.0.1:2379  \
   --cacert=/etc/kubernetes/pki/etcd/ca.crt \
@@ -67,9 +54,7 @@ cat backup.db | grep -a password123
 
 cat backup.db | grep -a password456
 
-
 # fix old data in backup
-<!-- TODO does not work maybe due to password version v1 -->
 
 etcdctl --write-out=table snapshot status backup.db
 
@@ -78,8 +63,10 @@ etcdctl \
   --cacert=/etc/kubernetes/pki/etcd/ca.crt \
   --cert=/etc/kubernetes/pki/etcd/server.crt \
   --key=/etc/kubernetes/pki/etcd/server.key \
-  compact 27862
+  compact 33864
 
 ... create backup again
+
+<!-- TODO does not work -->
 
 cat backup.db | grep -a password123
