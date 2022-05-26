@@ -13,10 +13,9 @@ etcdctl \
   --key=/etc/kubernetes/pki/etcd/server.key \
       get /registry/secrets/default/my-secret
 
-
 # implement encryption at rest
 
-## customize encryption-provider-config
+# customize encryption-provider-config
 
 take a look at encryption config => PW and resource types
 
@@ -24,7 +23,7 @@ cp /root/lines-of-defence/tasks/06_encryption_at_rest/encryption-config.yaml /ro
 
 --encryption-provider-config=/apiserver/encryption-config.yaml
 
-## check encryption => expected fail
+# check encryption => expected fail
 
 etcdctl \
   --endpoints=https://127.0.0.1:2379  \
@@ -41,32 +40,3 @@ kubectl create secret generic my-secret-2 --from-literal password2=password456
 kubectl get secrets --all-namespaces -o json | kubectl replace -f -
 
 ...etcd my-secret
-
-# backup
-etcdctl \
-  --endpoints=https://127.0.0.1:2379  \
-  --cacert=/etc/kubernetes/pki/etcd/ca.crt \
-  --cert=/etc/kubernetes/pki/etcd/server.crt \
-  --key=/etc/kubernetes/pki/etcd/server.key \
-      snapshot save backup.db
-
-cat backup.db | grep -a password123
-
-cat backup.db | grep -a password456
-
-# fix old data in backup
-
-etcdctl --write-out=table snapshot status backup.db
-
-etcdctl \
-  --endpoints=https://127.0.0.1:2379  \
-  --cacert=/etc/kubernetes/pki/etcd/ca.crt \
-  --cert=/etc/kubernetes/pki/etcd/server.crt \
-  --key=/etc/kubernetes/pki/etcd/server.key \
-  compact 33864
-
-... create backup again
-
-<!-- TODO does not work -->
-
-cat backup.db | grep -a password123

@@ -6,7 +6,7 @@ metadata:
 spec:
   podSelector:
     matchLabels:
-      app: my-pod
+      app: my-nginx
   policyTypes:
     - Ingress
   ingress:

@@ -11,29 +11,33 @@ cat /sys/kernel/security/apparmor/profiles
 aa-status
 
 # default profiles directory
-/etc/apparmor.d/
+cat /etc/apparmor.d/
 
-create kubernetes apparmor file
+=> mv 11_apparmor/kubernetes /etc/apparmor.d/
 
 # load profile
+
+<!-- TODO do I need to do this really? -->
+
 apparmor_parser /etc/apparmor.d/kubernetes
-# if nothing is printed out the profile was loaded
+=> if nothing is printed out the profile was loaded
 
+# make use of apparmor in pod
 
-kubectl exec my-pod -- cat /proc/1/attr/current
-=> see if profile is available
+... engage apparmor annotation
 
-<!-- TODO tmp test exists maybe another file -->
-kubectl exec my-pod -- touch /tmp/test
+kubectl exec my-suboptimal-pod -- touch /tmp/some.file
 => error
 
-<!-- TODO maybe setup apparmor in general setup -->
+# apparmor logging
+aa-complain /etc/apparmor.d/kubernetes
 
-
-
+<!-- https://wiki.debian.org/AppArmor/HowToUse#:~:text=AppArmor%20logs%20can%20be%20found,log%20when%20auditd%20is%20installed). -->
+<!-- TODO not sure if apparmor is the reason for failing here-->
+cat /var/log/syslog | grep k8s-apparmor-deny-write
 
 
 # disable profile
-apparmor_parser -R /etc/apparmor.d/root.add_data.sh
+apparmor_parser -R /etc/apparmor.d/kubernetes
 # if nothing is printed out the profile was loaded
 ln -s /etc/apparmor.d/root.add_data.sh /etc/apparmor.d/disable/

@@ -21,3 +21,15 @@ verify installation as first step of tasks everywhere
 remove ubuntu image wherever possible, use smaller image
 
 keep data in own databases app databases
+
+greek title at the beginning:
+instead of tyrant => proactive
+
+ingress TLS encryption
+
+small pods comparison alpine / ubuntu
+
+visualization of ci/CD and git-repo has the wrong order... or has it if we have a dedicated git infra repo for gitops?
+
+fix numbering of tasks
+

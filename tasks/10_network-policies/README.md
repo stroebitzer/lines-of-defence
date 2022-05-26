@@ -1,18 +1,22 @@
 
-
-kubectl apply -f my-pod.yaml
-
+# create nginx 
+kubectl run my-nginx --port 80 --labels app=my-nginx --image nginx
 kubectl expose pod my-pod --type NodePort
 
-ip a | grep inet
-<!-- TODO store public IP at the beginning into envvar -->
-
-<!-- TODO naming of things and labeling is ugly -->
-
+# verify in browser
 kubectl get svc
+curl $IP:30242
 
-=> visit nginx in browser
+# check network policy
+
+kubectl apply -f my-network-policy.yaml
 
 kubectl run caller --rm -it --image nicolaka/netshoot
 
+curl my-nginx
+=> expected failure
+
 kubectl run caller --rm -it --labels app=caller --image nicolaka/netshoot
+
+curl my-nginx
+=> should work
