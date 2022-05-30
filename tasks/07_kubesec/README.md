@@ -1,7 +1,3 @@
-
-# verify that kube config is encrypted
-cat /root/.kube/config
-
 # fix critical issues
 
 kubesec scan pod.yaml
@@ -11,6 +7,8 @@ kubesec scan pod.yaml
 ...run again
 
 # fix advised issues
+
+<!-- TODO fix what? -->
 
 
 

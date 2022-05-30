@@ -3,10 +3,6 @@
 cat /etc/kubernetes/manifests/etcd.yaml 
 ls -alh /var/lib/etcd/
 
-kubectl create secret generic my-secret --from-literal my-password-1=password123
-
-<!-- TODO use envvars to make etcdctl nicer??? -->
-
 # check secret is in plain text
 etcdctl get /registry/secrets/default/my-secret
 

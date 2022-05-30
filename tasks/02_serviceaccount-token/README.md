@@ -17,12 +17,6 @@ kubectl get clusterrolebindings
 
 kubectl delete clusterrolebinding my-suboptimal-clusterrolebinding
 
-kubectl create clusterrolebinding my-suboptimal-clusterrolebinding --clusterrole=cluster-admin --serviceaccount default:default
-
-... curl again
-
-=> should not work
-
 # check kubadm
 cat /etc/kubernetes/manifests/kube-apiserver.yaml 
 
