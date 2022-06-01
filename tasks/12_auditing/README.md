@@ -5,10 +5,10 @@ copy audit-policy.yaml file to /root/apiserver/audit-policy.yaml
 
 => in apiserver
 ```bash
---audit-policy-file=/apiserver/audit-policy.yaml
---audit-log-path=/apiserver/default-secrets.log
---audit-log-maxage=10
---audit-log-maxsize=100
+    - --audit-policy-file=/apiserver/audit-policy.yaml
+    - --audit-log-path=/apiserver/default-secrets.log
+    - --audit-log-maxage=10
+    - --audit-log-maxsize=100
 ```
 
 # use it

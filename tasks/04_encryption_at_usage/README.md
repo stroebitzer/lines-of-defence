@@ -11,8 +11,8 @@ kubectl get secret my-secret -o jsonpath='{.data.password}' | base64 -d
 kubectl apply -f pod.yaml
 
 # view plaintext secret in pod
-kubectl exec -it my-pod-using-secret -- ls -alh /secret/
-kubectl exec -it my-pod-using-secret -- cat /secret/password
+kubectl exec -it my-suboptimal-pod -- ls -alh /secret/
+kubectl exec -it my-suboptimal-pod -- cat /secret/password
 
 # view plaintext secret on host
 df | grep tmpfs

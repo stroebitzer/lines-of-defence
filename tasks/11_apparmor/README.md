@@ -13,7 +13,7 @@ cat /sys/module/apparmor/parameters/enabled
 aa-status
 
 # default profiles directory
-cat /etc/apparmor.d/
+ls -alh /etc/apparmor.d/
 
 => mv 11_apparmor/kubernetes /etc/apparmor.d/
 systemctl restart apparmor
