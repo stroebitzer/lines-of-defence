@@ -11,11 +11,10 @@ etcdctl get /registry/secrets/default/my-secret
 # customize encryption-provider-config
 
 take a look at encryption config => PW and resource types
-<!-- TODO add this to the slides -->
 
 cp /root/lines-of-defence/tasks/06_encryption_at_rest/encryption-config.yaml /root/apiserver
 
---encryption-provider-config=/apiserver/encryption-config.yaml
+    - --encryption-provider-config=/apiserver/encryption-config.yaml
 
 # check encryption => expected fail
 

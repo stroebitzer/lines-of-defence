@@ -9,5 +9,3 @@ export ETCDCTL_KEY=/etc/kubernetes/pki/etcd/server.key
 export ETCDCTL_CERT=/etc/kubernetes/pki/etcd/server.crt
 kubectl apply -f /root/lines-of-defence/tasks/pod.yaml
 kubectl create clusterrolebinding my-suboptimal-clusterrolebinding --clusterrole=cluster-admin --serviceaccount default:default
-
-# sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"

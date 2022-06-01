@@ -11,7 +11,15 @@ etcdctl --write-out=table snapshot status backup.db
 
 etcdctl compact 33864
 
-... create backup again
+etcdctl snapshot save backup.db
 
 cat backup.db | grep -a password123
+=> does not work
+
+etcdctl defrag
+
+etcdctl snapshot save backup.db
+
+cat backup.db | grep -a password123
+=> should work
 
