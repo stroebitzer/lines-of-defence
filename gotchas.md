@@ -44,3 +44,13 @@ Add Image Scanner to your Delivery Pipeline
 Use a tool which scans dependencies of applications
 Do not put ANY sensitive data into your images
 
+GitOps Tools allow you do an abstraction of Kubernetes auth questions
+Kubernetes Users auth questions are answered by the Git Repo
+
+# kyverno
+Validating Webhooks have no effect on already existing Pods
+PSPs are deprecated
+OPA Gatekeeper involves learning a new language, called Rego
+Kyverno supports to modes: enforce or audit
+ImagePolicyWebhooks can also be used for limiting allowed registries
+

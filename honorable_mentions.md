@@ -1,3 +1,4 @@
 network policies
 small images
-apparmor
+Network Policies
+Container Sandboxing: Gvisor or Kata Containers
