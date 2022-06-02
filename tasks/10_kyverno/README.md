@@ -7,6 +7,3 @@ kubectl apply -f pod.yaml
 kubectl delete -f image-registry-cluster-policy.yaml
 kubectl apply -f pod.yaml
 => should work again
-
-
-

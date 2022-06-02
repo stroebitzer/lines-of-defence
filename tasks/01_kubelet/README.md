@@ -19,8 +19,8 @@ curl -XPOST -k https://$IP:10250/run/default/my-suboptimal-pod/my-ubuntu -d "cmd
 vi /var/lib/kubelet/config.yaml
 => enabled: false
 => mode: Webhook
-systemctl daemon-reload
+<!-- systemctl daemon-reload -->
 systemctl restart kubelet
-systemctl status kubelet
+<!-- systemctl status kubelet -->
 
 ... run curls again
