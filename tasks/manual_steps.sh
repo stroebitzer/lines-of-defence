@@ -1,3 +1,5 @@
+#!/bin/bash
+
 export IP=$(curl https://ipinfo.io/ip)
 export API_SERVER=https://$IP:6443
 PS1="$ "

@@ -4,6 +4,9 @@ kubectl delete pod my-suboptimal-pod
 kubectl apply -f pod.yaml
 => expect error
 
-kubectl delete -f image-registry-cluster-policy.yaml
+helm -n kyverno uninstall kyverno
+
+<!-- kubectl delete -f image-registry-cluster-policy.yaml -->
 kubectl apply -f pod.yaml
 => should work again
+
