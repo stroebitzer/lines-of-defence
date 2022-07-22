@@ -3,7 +3,6 @@
 export IP=$(curl https://ipinfo.io/ip)
 export API_SERVER=https://$IP:6443
 PS1="$ "
-source <(kubectl completion bash)
 export ETCDCTL_API=3
 export ETCDCTL_ENDPOINTS=https://127.0.0.1:2379
 export ETCDCTL_CACERT=/etc/kubernetes/pki/etcd/ca.crt

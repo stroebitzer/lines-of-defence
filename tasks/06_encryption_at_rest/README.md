@@ -14,7 +14,10 @@ take a look at encryption config => PW and resource types
 
 cp /root/lines-of-defence/tasks/06_encryption_at_rest/encryption-config.yaml /root/apiserver
 
-    - --encryption-provider-config=/apiserver/encryption-config.yaml
+```
+- --encryption-provider-config=/apiserver/encryption-config.yaml
+```
+=> crictl ps
 
 # check encryption => expected fail
 

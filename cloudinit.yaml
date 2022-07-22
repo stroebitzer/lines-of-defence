@@ -68,8 +68,7 @@ runcmd:
   - echo "================================================= CloudInit Phase User Preps"
   - mkdir -p /root/.kube
   - cp -i /etc/kubernetes/admin.conf /root/.kube/config
-  # TODO is it the problem of cloud init?
-  # - source <(kubectl completion bash)
+  - echo "source <(kubectl completion bash)" >>/root/.bashrc
 
   - echo "================================================= CloudInit Phase Install kubectx"
   - git clone https://github.com/ahmetb/kubectx /opt/kubectx

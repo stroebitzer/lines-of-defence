@@ -8,7 +8,7 @@ kubectl get secret my-secret -o jsonpath='{.data.password}' | base64 -d
 
 # use secret
 => add secret volume in pod
-kubectl apply -f pod.yaml
+kubectl apply -f pod.yaml --force
 
 # view plaintext secret in pod
 kubectl exec -it my-suboptimal-pod -- ls -alh /secret/

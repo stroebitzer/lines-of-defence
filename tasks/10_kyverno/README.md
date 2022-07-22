@@ -5,8 +5,10 @@ kubectl apply -f pod.yaml
 => expect error
 
 helm -n kyverno uninstall kyverno
-
+<!-- TODO does not work very properly -->
 <!-- kubectl delete -f image-registry-cluster-policy.yaml -->
+kubectl delete ns kyverno
+
 kubectl apply -f pod.yaml
 => should work again
 
