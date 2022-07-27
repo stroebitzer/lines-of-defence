@@ -1,7 +1,7 @@
 
 # setup
 
-cp 12_auditing/audit-policy.yaml /root/apiserver/audit-policy.yaml
+cp 12_auditing/audit-policy.yaml /root/apiserver/
 
 => in apiserver
 ```bash

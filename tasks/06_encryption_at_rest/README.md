@@ -4,6 +4,9 @@ cat /etc/kubernetes/manifests/etcd.yaml
 ls -alh /var/lib/etcd/
 
 # check secret is in plain text
+
+kubectl create secret generic my-secret --from-literal password=password123
+
 etcdctl get /registry/secrets/default/my-secret
 
 # implement encryption at rest

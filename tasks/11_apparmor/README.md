@@ -18,6 +18,8 @@ ls -alh /etc/apparmor.d/
 => cp 11_apparmor/my-apparmor-profile /etc/apparmor.d/
 systemctl restart apparmor
 
+aa-status
+
 # make use of apparmor in pod
 
 => engage apparmor annotation
